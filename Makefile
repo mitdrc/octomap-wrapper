@@ -1,4 +1,4 @@
-REPO := https://octomap.svn.sourceforge.net/svnroot/octomap/tags/v1.5.1/
+REPO := https://svn.code.sf.net/p/octomap/code/tags/v1.5.1/
 CHECKOUT_DIR := octomap-v1.5.1
 
 default_target: all
