@@ -43,6 +43,8 @@ configure: $(CHECKOUT_DIR)/CMakeLists.txt
 		   
 $(CHECKOUT_DIR)/CMakeLists.txt:
 	svn checkout $(REPO) $(CHECKOUT_DIR)
+	echo "Applying patches for compatibility with gcc 2.8"
+	- patch -d $(CHECKOUT_DIR) -p0 -N -s -i ../gcc-2.8-compat.patch
 		   
 
 clean:
