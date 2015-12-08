@@ -1,5 +1,6 @@
-REPO := https://svn.code.sf.net/p/octomap/code/tags/v1.5.1/
-CHECKOUT_DIR := octomap-v1.5.1
+REPO := https://github.com/OctoMap/octomap.git
+CHECKOUT_DIR := octomap
+SHA1 := 5ba840e58a35e2d14c40d0af807da879a1a2fd83
 
 default_target: all
 
@@ -42,9 +43,12 @@ configure: $(CHECKOUT_DIR)/CMakeLists.txt
 		   -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) ../$(CHECKOUT_DIR)/octomap
 		   
 $(CHECKOUT_DIR)/CMakeLists.txt:
-	svn checkout $(REPO) $(CHECKOUT_DIR)
+	git clone $(REPO) $(CHECKOUT_DIR)
+	cd $(CHECKOUT_DIR)
+	git reset --hard $SHA1
 	echo "Applying patches for compatibility with gcc 2.8"
-	- patch -d $(CHECKOUT_DIR) -p0 -N -s -i ../gcc-2.8-compat.patch
+	cd ..
+	#- patch -d $(CHECKOUT_DIR) -p0 -N -s -i ../gcc-2.8-compat.patch
 		   
 
 clean:
