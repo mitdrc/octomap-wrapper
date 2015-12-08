@@ -1,6 +1,6 @@
 REPO := https://github.com/OctoMap/octomap.git
 CHECKOUT_DIR := octomap
-SHA1 := 5ba840e58a35e2d14c40d0af807da879a1a2fd83
+REVISION := 5ba840e58a35e2d14c40d0af807da879a1a2fd83
 
 default_target: all
 
@@ -44,12 +44,8 @@ configure: $(CHECKOUT_DIR)/CMakeLists.txt
 		   
 $(CHECKOUT_DIR)/CMakeLists.txt:
 	git clone $(REPO) $(CHECKOUT_DIR)
-	cd $(CHECKOUT_DIR)
-	git reset --hard $(SHA1)
-	echo "Applying patches for compatibility with gcc 2.8"
-	cd ..
-	#- patch -d $(CHECKOUT_DIR) -p0 -N -s -i ../gcc-2.8-compat.patch
-		   
+	echo "Applying SHA1"
+	cd $(CHECKOUT_DIR); git checkout $(REVISION)
 
 clean:
 	-if [ -e pod-build/install_manifest.txt ]; then rm -f `cat pod-build/install_manifest.txt`; fi
