@@ -45,7 +45,7 @@ configure: $(CHECKOUT_DIR)/CMakeLists.txt
 $(CHECKOUT_DIR)/CMakeLists.txt:
 	git clone $(REPO) $(CHECKOUT_DIR)
 	cd $(CHECKOUT_DIR)
-	git reset --hard $SHA1
+	git reset --hard $(SHA1)
 	echo "Applying patches for compatibility with gcc 2.8"
 	cd ..
 	#- patch -d $(CHECKOUT_DIR) -p0 -N -s -i ../gcc-2.8-compat.patch
